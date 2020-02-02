@@ -1,0 +1,29 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--todo dodać header do wszystkich stron-->
+<div th:fragment="headercss">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" href="/css/signin.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</div>
+<div th:fragment="header-fragment">
+    <div class="topnav">
+        <a href="/find">Znajdź</a>
+        <a th:if="${@userContext.isLoggedIn()}" href="/shop">Sklep</a>
+        <a th:if="${@userContext.isAdmin()}" href="/users/list">Użytkownicy</a>
+        <a th:if="!${@userContext.isLoggedIn()}" href="/register" style="float: right">Rejestracja</a>
+        <a th:if="!${@userContext.isLoggedIn()}" href="/login" style="float: right">Logowanie</a>
+        <a th:if="${@userContext.isLoggedIn()}" style="float: right" href="/logout">Wyloguj</a>
+        <a th:if="${@userContext.isLoggedIn()}" style="color: white; float: right"
+           th:text="${@userContext.provideUsername()}" th:href="${@userContext.provideUsername()}"></a>
+    </div>
+</div>
